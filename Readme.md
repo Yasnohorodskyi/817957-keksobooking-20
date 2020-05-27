@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Andrii Yasnohorodskyi](https://up.htmlacademy.ru/javascript/20/user/817957).
-* Наставник: `Неизвестно`.
+* Наставник: `Максим Деев`.
 
 ---
 
