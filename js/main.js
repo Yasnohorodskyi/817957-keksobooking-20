@@ -120,7 +120,7 @@ var renderCard = function (cardDataMocks) {
   var getCardAddress = function (card, cardData) {
     var cardAddress = card.querySelector('.popup__text--address');
     if (cardData.offer.address.length) {
-      cardAddress.textContent = cardDataMocks.offer.address;
+      cardAddress.textContent = cardData.offer.address;
     } else {
       card.removeChild(cardAddress);
     }
@@ -129,8 +129,8 @@ var renderCard = function (cardDataMocks) {
 
   var getCardPrice = function (card, cardData) {
     var cardPrice = card.querySelector('.popup__text--price');
-    if (cardData.offer.price.length) {
-      cardPrice.textContent = cardDataMocks.offer.price + '₽/ночь';
+    if (cardData.offer.price !== 'undefined') {
+      cardPrice.textContent = cardData.offer.price + '₽/ночь';
     } else {
       card.removeChild(cardPrice);
     }
@@ -139,8 +139,8 @@ var renderCard = function (cardDataMocks) {
 
   var getCardTypeAccomodation = function (card, cardData, translation) {
     var cardTypeAccomodation = card.querySelector('.popup__type');
-    if (translation[cardDataMocks.offer.type].length) {
-      cardTypeAccomodation.textContent = translation[cardDataMocks.offer.type];
+    if (translation[cardData.offer.type].length) {
+      cardTypeAccomodation.textContent = translation[cardData.offer.type];
     } else {
       card.removeChild(cardTypeAccomodation);
     }
@@ -149,8 +149,9 @@ var renderCard = function (cardDataMocks) {
 
   var getCardCapacity = function (card, cardData) {
     var cardCapacity = card.querySelector('.popup__text--capacity');
-    if (cardData.offer.rooms.length && cardData.offer.guests.length) {
-      cardCapacity.textContent = cardDataMocks.offer.rooms + ' комнаты для ' + cardDataMocks.offer.guests + 'гостей';
+
+    if (cardData.offer.rooms !== 'undefined' && cardData.offer.guests !== 'undefined') {
+      cardCapacity.textContent = cardData.offer.rooms + ' комнаты для ' + cardData.offer.guests + ' гостей';
     } else {
       card.removeChild(cardCapacity);
     }
@@ -159,8 +160,9 @@ var renderCard = function (cardDataMocks) {
 
   var getCardTime = function (card, cardData) {
     var cardTime = card.querySelector('.popup__text--time');
+
     if (cardData.offer.checkin.length && cardData.offer.checkout.length) {
-      cardTime.textContent = 'Заезд после ' + cardDataMocks.offer.checkin + ', выезд до ' + cardDataMocks.offer.checkout;
+      cardTime.textContent = 'Заезд после ' + cardData.offer.checkin + ', выезд до ' + cardData.offer.checkout;
     } else {
       card.removeChild(cardTime);
     }
@@ -190,7 +192,7 @@ var renderCard = function (cardDataMocks) {
   var getCardDescription = function (card, cardData) {
     var cardDescription = card.querySelector('.popup__description');
     if (cardData.offer.description.length) {
-      cardDescription.textContent = cardDataMocks.offer.description;
+      cardDescription.textContent = cardData.offer.description;
     } else {
       card.removeChild(cardDescription);
     }
@@ -199,6 +201,7 @@ var renderCard = function (cardDataMocks) {
 
   var getCardPhotos = function (card, cardData) {
     var fragmentPhotos = document.createDocumentFragment();
+    var cardPhotos = card.querySelector('.popup__photos');
     var cardPhoto = card.querySelector('.popup__photo');
 
     if (cardData.offer.photos.length) {
@@ -208,17 +211,17 @@ var renderCard = function (cardDataMocks) {
         cardImg.src = cardData.offer.photos[j];
         fragmentPhotos.appendChild(cardImg);
       }
+      cardPhotos.appendChild(fragmentPhotos);
     } else {
       card.removeChild(cardPhoto);
     }
-
-    return fragmentPhotos;
+    return cardPhotos;
   };
 
   var getAvatar = function (card, cardData) {
     var cardAvatar = card.querySelector('.popup__avatar');
     if (cardData.author.avatar.length) {
-      cardAvatar.src = cardDataMocks.author.avatar;
+      cardAvatar.src = cardData.author.avatar;
     } else {
       card.removeChild(cardAvatar);
     }
